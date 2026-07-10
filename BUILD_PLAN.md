@@ -5,7 +5,7 @@ Each step ends with something you can run and see. MVP is Step 10.
 ## Phase 1: The extractor (MVP)
 
 - [x] **Step 1: Project kickoff.** Repo created, 13 real sample documents collected in `samples/` (7 PDFs and 6 email screenshots from Integrity Express Logistics, Transportation One, FST Brokerage Services, and TMC).
-- [ ] **Step 2: App scaffold.** Create the Next.js + TypeScript app, run it locally, see the home page.
+- [x] **Step 2: App scaffold.** Create the Next.js + TypeScript app, run it locally, see the home page. (Next.js 16, React 19, Tailwind; dev server on port 3001)
 - [ ] **Step 3: Database.** Supabase project with a `loads` table: broker, load_number, pickup_location, pickup_date, pickup_window, delivery_location, delivery_date, delivery_window, miles, weight, equipment, rate, status, needs_review, confidence, raw_text, source_file. Remember: new Supabase projects need explicit GRANTs for API roles.
 - [ ] **Step 4: Text extraction.** API route that accepts an uploaded PDF and returns its raw text. Detect PDFs with no text layer (like semail.pdf) and mark them for the vision path.
 - [ ] **Step 5: The extraction brain.** Send the raw text to the Claude API with a prompt that returns strict JSON matching our load record schema, with a confidence value per field. Test it against the Integrity Express sample first.
