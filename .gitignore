@@ -1,0 +1,10 @@
+# Real documents with real phone numbers and contacts: never commit
+samples/
+
+# Standard
+node_modules/
+.next/
+.env
+.env.local
+.vercel
+.DS_Store
