@@ -24,8 +24,33 @@ export type ExtractionUsage = {
   cost_usd: number;
 };
 
+// The document arrives in one of three forms: extracted text, a photo or
+// screenshot, or a scanned PDF that Claude reads visually page by page.
+export type ExtractInput =
+  | { kind: "text"; text: string }
+  | { kind: "image"; base64: string; mediaType: "image/jpeg" | "image/png" | "image/gif" | "image/webp" }
+  | { kind: "pdf"; base64: string };
+
+const INSTRUCTION = "Extract the load record from this rate confirmation:";
+
+function buildContent(input: ExtractInput): Anthropic.ContentBlockParam[] {
+  if (input.kind === "text") {
+    return [{ type: "text", text: `${INSTRUCTION}\n\n${input.text}` }];
+  }
+  if (input.kind === "image") {
+    return [
+      { type: "image", source: { type: "base64", media_type: input.mediaType, data: input.base64 } },
+      { type: "text", text: INSTRUCTION },
+    ];
+  }
+  return [
+    { type: "document", source: { type: "base64", media_type: "application/pdf", data: input.base64 } },
+    { type: "text", text: INSTRUCTION },
+  ];
+}
+
 export async function extractLoad(
-  documentText: string
+  input: ExtractInput
 ): Promise<{ record: LoadRecord; usage: ExtractionUsage }> {
   const client = new Anthropic();
   const response = await client.messages.parse({
@@ -33,12 +58,7 @@ export async function extractLoad(
     max_tokens: 4000,
     thinking: { type: "adaptive" },
     system: SYSTEM_PROMPT,
-    messages: [
-      {
-        role: "user",
-        content: `Extract the load record from this rate confirmation:\n\n${documentText}`,
-      },
-    ],
+    messages: [{ role: "user", content: buildContent(input) }],
     output_config: { format: zodOutputFormat(LoadRecordSchema) },
   });
 

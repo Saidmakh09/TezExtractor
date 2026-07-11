@@ -14,16 +14,27 @@ export async function POST(request: Request) {
       );
     }
 
-    const text = await extractFromFile(await file.arrayBuffer(), file.type);
-    if (text.needsVision) {
-      return NextResponse.json(
-        { ok: false, error: "Scanned or image document: vision path arrives in Step 6" },
-        { status: 501 }
-      );
+    const buffer = await file.arrayBuffer();
+    // Encode before text extraction: the PDF parser transfers the buffer to a
+    // worker and detaches it, so it cannot be read again afterward.
+    const base64 = Buffer.from(new Uint8Array(buffer)).toString("base64");
+    const extracted = await extractFromFile(buffer, file.type);
+
+    let input;
+    if (extracted.kind === "image") {
+      input = {
+        kind: "image" as const,
+        base64,
+        mediaType: file.type as "image/jpeg" | "image/png" | "image/gif" | "image/webp",
+      };
+    } else if (extracted.kind === "pdf-scan") {
+      input = { kind: "pdf" as const, base64 };
+    } else {
+      input = { kind: "text" as const, text: extracted.text };
     }
 
-    const { record, usage } = await extractLoad(text.text);
-    return NextResponse.json({ ok: true, name: file.name, record, usage });
+    const { record, usage } = await extractLoad(input);
+    return NextResponse.json({ ok: true, name: file.name, path: extracted.kind, record, usage });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return NextResponse.json({ ok: false, error: message }, { status: 500 });
