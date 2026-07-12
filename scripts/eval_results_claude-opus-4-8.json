@@ -1,0 +1,1000 @@
+{
+  "model": "claude-opus-4-8",
+  "overall": {
+    "correct": 145,
+    "total": 156
+  },
+  "perField": {
+    "broker": {
+      "correct": 12,
+      "total": 13
+    },
+    "load_number": {
+      "correct": 12,
+      "total": 13
+    },
+    "pickup_location": {
+      "correct": 11,
+      "total": 13
+    },
+    "pickup_date": {
+      "correct": 12,
+      "total": 13
+    },
+    "pickup_window": {
+      "correct": 12,
+      "total": 13
+    },
+    "delivery_location": {
+      "correct": 12,
+      "total": 13
+    },
+    "delivery_date": {
+      "correct": 12,
+      "total": 13
+    },
+    "delivery_window": {
+      "correct": 12,
+      "total": 13
+    },
+    "miles": {
+      "correct": 13,
+      "total": 13
+    },
+    "weight": {
+      "correct": 12,
+      "total": 13
+    },
+    "equipment": {
+      "correct": 13,
+      "total": 13
+    },
+    "rate": {
+      "correct": 12,
+      "total": 13
+    }
+  },
+  "totalCost": 0.38910000000000006,
+  "results": [
+    {
+      "file": "1971493-Carrier-Rate-Confirmation.pdf",
+      "correct": 12,
+      "fields": {
+        "broker": {
+          "ok": true,
+          "expected": "Integrity Express Logistics",
+          "got": "Integrity Express Logistics"
+        },
+        "load_number": {
+          "ok": true,
+          "expected": "1971493",
+          "got": "1971493"
+        },
+        "pickup_location": {
+          "ok": true,
+          "expected": "Jetersville, VA",
+          "got": "SWIFT CREEK FOREST PRODUCTS, 20200 Patrick Henry Highway, Jetersville, VA 23083"
+        },
+        "pickup_date": {
+          "ok": true,
+          "expected": "2023-09-20",
+          "got": "2023-09-20"
+        },
+        "pickup_window": {
+          "ok": true,
+          "expected": "FCFS 1200-1530",
+          "got": "FCFS 1200-1530"
+        },
+        "delivery_location": {
+          "ok": true,
+          "expected": "Rock Hill, SC",
+          "got": "COROPLAST INC, 1230 Galleria Blvd, Rock Hill, SC 29730"
+        },
+        "delivery_date": {
+          "ok": true,
+          "expected": "2023-09-21",
+          "got": "2023-09-21"
+        },
+        "delivery_window": {
+          "ok": true,
+          "expected": "0830",
+          "got": "0830 Appt"
+        },
+        "miles": {
+          "ok": true,
+          "expected": 259.1,
+          "got": 259.1
+        },
+        "weight": {
+          "ok": true,
+          "expected": 28000,
+          "got": 28000
+        },
+        "equipment": {
+          "ok": true,
+          "expected": "van",
+          "got": "Van 53 ft DRY"
+        },
+        "rate": {
+          "ok": true,
+          "expected": 730,
+          "got": 730
+        }
+      },
+      "cost": 0.0342,
+      "path": "pdf-text"
+    },
+    {
+      "file": "415053.pdf",
+      "correct": 12,
+      "fields": {
+        "broker": {
+          "ok": true,
+          "expected": "Transportation One",
+          "got": "Transportation One, LLC"
+        },
+        "load_number": {
+          "ok": true,
+          "expected": "415053",
+          "got": "415053"
+        },
+        "pickup_location": {
+          "ok": true,
+          "expected": "Lancaster, PA",
+          "got": "AMERIMAX HOME PROD, 450 RICHARDSON DRIVE, LANCASTER, PA 17604"
+        },
+        "pickup_date": {
+          "ok": true,
+          "expected": "2023-09-25",
+          "got": "2023-09-25"
+        },
+        "pickup_window": {
+          "ok": true,
+          "expected": "18:00",
+          "got": "09/25/23 18:00 APPT"
+        },
+        "delivery_location": {
+          "ok": true,
+          "expected": "Nappanee, IN",
+          "got": "EURAMAX EXTERIOR PRODUCTS, INC., 2341 E. MARKET STREET, NAPPANEE, IN 46550"
+        },
+        "delivery_date": {
+          "ok": true,
+          "expected": "2023-09-26",
+          "got": "2023-09-26"
+        },
+        "delivery_window": {
+          "ok": true,
+          "expected": "12:30",
+          "got": "09/26/23 12:30 CONFIRMED"
+        },
+        "miles": {
+          "ok": true,
+          "expected": 589,
+          "got": 589
+        },
+        "weight": {
+          "ok": true,
+          "expected": 42000,
+          "got": 42000
+        },
+        "equipment": {
+          "ok": true,
+          "expected": [
+            "53v",
+            "van"
+          ],
+          "got": "53V"
+        },
+        "rate": {
+          "ok": true,
+          "expected": 1100,
+          "got": 1100
+        }
+      },
+      "cost": 0.0324,
+      "path": "pdf-text"
+    },
+    {
+      "file": "RateConfirmation(129954).pdf",
+      "correct": 12,
+      "fields": {
+        "broker": {
+          "ok": true,
+          "expected": "FST Brokerage",
+          "got": "FST Brokerage Services"
+        },
+        "load_number": {
+          "ok": true,
+          "expected": "129954",
+          "got": "129954"
+        },
+        "pickup_location": {
+          "ok": true,
+          "expected": "Grove City, OH",
+          "got": "Grove City, OH 43123"
+        },
+        "pickup_date": {
+          "ok": true,
+          "expected": "2023-10-09",
+          "got": "2023-10-09"
+        },
+        "pickup_window": {
+          "ok": true,
+          "expected": "10:00",
+          "got": "Appointment 10/09/23 @ 10:00"
+        },
+        "delivery_location": {
+          "ok": true,
+          "expected": "Acworth, GA",
+          "got": "Acworth, GA 30102"
+        },
+        "delivery_date": {
+          "ok": true,
+          "expected": "2023-10-10",
+          "got": "2023-10-10"
+        },
+        "delivery_window": {
+          "ok": true,
+          "expected": "09:00",
+          "got": "Appointment 10/10/23 @ 09:00"
+        },
+        "miles": {
+          "ok": true,
+          "expected": 532,
+          "got": 532
+        },
+        "weight": {
+          "ok": true,
+          "expected": 42500,
+          "got": 42500
+        },
+        "equipment": {
+          "ok": true,
+          "expected": "van",
+          "got": "53' VAN"
+        },
+        "rate": {
+          "ok": true,
+          "expected": 1700,
+          "got": 1700
+        }
+      },
+      "cost": 0.0226,
+      "path": "pdf-text"
+    },
+    {
+      "file": "Carrier_rate_confirmation_-__31417-95981.pdf",
+      "correct": 12,
+      "fields": {
+        "broker": {
+          "ok": true,
+          "expected": "Chariot",
+          "got": "Chariot Logistics Inc"
+        },
+        "load_number": {
+          "ok": true,
+          "expected": "31417-95981",
+          "got": "31417-95981"
+        },
+        "pickup_location": {
+          "ok": true,
+          "expected": "Kalamazoo, MI",
+          "got": "TMC Evergreen Packaging - Kalamazoo, 2315 Miller Rd, KALAMAZOO, MI 49001"
+        },
+        "pickup_date": {
+          "ok": true,
+          "expected": "2023-09-26",
+          "got": "2023-09-26"
+        },
+        "pickup_window": {
+          "ok": true,
+          "expected": "13:00",
+          "got": "13:00 Apt"
+        },
+        "delivery_location": {
+          "ok": true,
+          "expected": "Baltimore, MD",
+          "got": "Cloverland Green Spring, 2701 Loch Raven Rd., BALTIMORE, MD 21218"
+        },
+        "delivery_date": {
+          "ok": true,
+          "expected": "2023-09-27",
+          "got": "2023-09-27"
+        },
+        "delivery_window": {
+          "ok": true,
+          "expected": [
+            "06:00-12:00",
+            "0600"
+          ],
+          "got": "06:00-12:00 Apt"
+        },
+        "miles": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "weight": {
+          "ok": true,
+          "expected": 31555,
+          "got": 31555
+        },
+        "equipment": {
+          "ok": true,
+          "expected": "van",
+          "got": "53' Dry Van with swing doors"
+        },
+        "rate": {
+          "ok": true,
+          "expected": 1850,
+          "got": 1850
+        }
+      },
+      "cost": 0.0445,
+      "path": "pdf-text"
+    },
+    {
+      "file": "Carrier_rate_confirmation_-__31433-44996 (1).pdf",
+      "correct": 12,
+      "fields": {
+        "broker": {
+          "ok": true,
+          "expected": "Sage Freight",
+          "got": "Sage Freight"
+        },
+        "load_number": {
+          "ok": true,
+          "expected": "31433-44996",
+          "got": "31433-44996"
+        },
+        "pickup_location": {
+          "ok": true,
+          "expected": "Blythewood, SC",
+          "got": "Amcor- SC, 1080 Jenkins Brothers Rd, Blythewood, SC 29016"
+        },
+        "pickup_date": {
+          "ok": true,
+          "expected": "2023-10-15",
+          "got": "2023-10-15"
+        },
+        "pickup_window": {
+          "ok": true,
+          "expected": "14:00",
+          "got": "14:00 Apt"
+        },
+        "delivery_location": {
+          "ok": true,
+          "expected": "Joplin, MO",
+          "got": "Refresco Joplin, 3502 Enterprise Ave, Joplin, MO 64801"
+        },
+        "delivery_date": {
+          "ok": true,
+          "expected": "2023-10-17",
+          "got": "2023-10-17"
+        },
+        "delivery_window": {
+          "ok": true,
+          "expected": "10:00",
+          "got": "10:00 Apt"
+        },
+        "miles": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "weight": {
+          "ok": true,
+          "expected": 30000,
+          "got": 30000
+        },
+        "equipment": {
+          "ok": true,
+          "expected": "van",
+          "got": "Van - dry"
+        },
+        "rate": {
+          "ok": true,
+          "expected": 1650,
+          "got": 1650
+        }
+      },
+      "cost": 0.0264,
+      "path": "pdf-text"
+    },
+    {
+      "file": "order_confirmation_1318716.pdf",
+      "correct": 12,
+      "fields": {
+        "broker": {
+          "ok": true,
+          "expected": "Axle Logistics",
+          "got": "Axle Logistics, LLC"
+        },
+        "load_number": {
+          "ok": true,
+          "expected": "1318716",
+          "got": "1318716"
+        },
+        "pickup_location": {
+          "ok": true,
+          "expected": "Greer, SC",
+          "got": "Speedway Whse & Packaging, 1627 Hwy 14, Greer, SC 29650"
+        },
+        "pickup_date": {
+          "ok": true,
+          "expected": "2023-09-12",
+          "got": "2023-09-12"
+        },
+        "pickup_window": {
+          "ok": true,
+          "expected": "1100",
+          "got": "1100"
+        },
+        "delivery_location": {
+          "ok": true,
+          "expected": "Ingleside, IL",
+          "got": "Fibertex USA, 27981 W. Concrete Dr., Ingleside, IL 60041"
+        },
+        "delivery_date": {
+          "ok": true,
+          "expected": "2023-09-13",
+          "got": "2023-09-13"
+        },
+        "delivery_window": {
+          "ok": true,
+          "expected": [
+            "0700",
+            "0700-1400"
+          ],
+          "got": "0700-1400"
+        },
+        "miles": {
+          "ok": true,
+          "expected": 762,
+          "got": 762
+        },
+        "weight": {
+          "ok": true,
+          "expected": 43000,
+          "got": 43000
+        },
+        "equipment": {
+          "ok": true,
+          "expected": "van",
+          "got": "Van (DAT)"
+        },
+        "rate": {
+          "ok": true,
+          "expected": 1300,
+          "got": 1300
+        }
+      },
+      "cost": 0.0233,
+      "path": "pdf-text"
+    },
+    {
+      "file": "semail.pdf",
+      "correct": 12,
+      "fields": {
+        "broker": {
+          "ok": true,
+          "expected": "Zipline",
+          "got": "Zipline Logistics, LLC"
+        },
+        "load_number": {
+          "ok": true,
+          "expected": [
+            "0517566",
+            "517566"
+          ],
+          "got": "0517566"
+        },
+        "pickup_location": {
+          "ok": true,
+          "expected": "Elwood, IL",
+          "got": "Partners Warehouse, 26416 S Walton Dr, Elwood, IL 60421"
+        },
+        "pickup_date": {
+          "ok": true,
+          "expected": "2023-10-12",
+          "got": "2023-10-12"
+        },
+        "pickup_window": {
+          "ok": true,
+          "expected": "1200",
+          "got": "10/12/2023 1200 - 10/12/2023 1200"
+        },
+        "delivery_location": {
+          "ok": true,
+          "expected": "Tulsa, OK",
+          "got": "Speciality Bakery of Tulsa, Inc, 12320 E. Skelly Drive, Tulsa, OK 74128"
+        },
+        "delivery_date": {
+          "ok": true,
+          "expected": "2023-10-13",
+          "got": "2023-10-13"
+        },
+        "delivery_window": {
+          "ok": true,
+          "expected": "1000",
+          "got": "10/13/2023 1000 - 10/13/2023 1000"
+        },
+        "miles": {
+          "ok": true,
+          "expected": 643,
+          "got": 643
+        },
+        "weight": {
+          "ok": true,
+          "expected": 18740,
+          "got": 18740
+        },
+        "equipment": {
+          "ok": true,
+          "expected": "van",
+          "got": "Van (DAT)"
+        },
+        "rate": {
+          "ok": true,
+          "expected": 1700,
+          "got": 1700
+        }
+      },
+      "cost": 0.0366,
+      "path": "pdf-scan"
+    },
+    {
+      "file": "photo_2026-07-09_20-10-28.jpg",
+      "correct": 9,
+      "fields": {
+        "broker": {
+          "ok": true,
+          "expected": [
+            null,
+            "Integrity Express"
+          ],
+          "got": "Integrity Express Logistics"
+        },
+        "load_number": {
+          "ok": false,
+          "expected": null,
+          "got": "4500143078"
+        },
+        "pickup_location": {
+          "ok": false,
+          "expected": null,
+          "got": "Nelson Company, Baltimore, MD"
+        },
+        "pickup_date": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "pickup_window": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "delivery_location": {
+          "ok": true,
+          "expected": [
+            null,
+            "Rock Hill"
+          ],
+          "got": "Compast Tape Corporation, Rock Hill, SC"
+        },
+        "delivery_date": {
+          "ok": true,
+          "expected": [
+            null,
+            "2023-09-20"
+          ],
+          "got": "2023-09-20"
+        },
+        "delivery_window": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "miles": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "weight": {
+          "ok": false,
+          "expected": [
+            null,
+            38390,
+            38590,
+            28390
+          ],
+          "got": 16190
+        },
+        "equipment": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "rate": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        }
+      },
+      "cost": 0.0372,
+      "path": "image"
+    },
+    {
+      "file": "photo_2026-07-09_20-10-32.jpg",
+      "correct": 12,
+      "fields": {
+        "broker": {
+          "ok": true,
+          "expected": "Integrity Express",
+          "got": "Integrity Express Logistics"
+        },
+        "load_number": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "pickup_location": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "pickup_date": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "pickup_window": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "delivery_location": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "delivery_date": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "delivery_window": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "miles": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "weight": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "equipment": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "rate": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        }
+      },
+      "cost": 0.0255,
+      "path": "image"
+    },
+    {
+      "file": "photo_2026-07-09_20-11-40.jpg",
+      "correct": 12,
+      "fields": {
+        "broker": {
+          "ok": true,
+          "expected": "Transportation One",
+          "got": "Transportation One LLC"
+        },
+        "load_number": {
+          "ok": true,
+          "expected": "415053",
+          "got": "415053"
+        },
+        "pickup_location": {
+          "ok": true,
+          "expected": [
+            null,
+            "PA"
+          ],
+          "got": null
+        },
+        "pickup_date": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "pickup_window": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "delivery_location": {
+          "ok": true,
+          "expected": [
+            null,
+            "IN"
+          ],
+          "got": null
+        },
+        "delivery_date": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "delivery_window": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "miles": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "weight": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "equipment": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "rate": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        }
+      },
+      "cost": 0.0226,
+      "path": "image"
+    },
+    {
+      "file": "photo_2026-07-09_20-11-10.jpg",
+      "correct": 12,
+      "fields": {
+        "broker": {
+          "ok": true,
+          "expected": "Uber Freight",
+          "got": "Uber Freight"
+        },
+        "load_number": {
+          "ok": true,
+          "expected": "9902331189",
+          "got": "UF-9902331189"
+        },
+        "pickup_location": {
+          "ok": true,
+          "expected": "Chicago, IL",
+          "got": "General Packaging Corporation, 7359 S Hamlin Ave, Chicago, IL 60629, US"
+        },
+        "pickup_date": {
+          "ok": true,
+          "expected": [
+            null,
+            "2023-09-13"
+          ],
+          "got": null
+        },
+        "pickup_window": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "delivery_location": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "delivery_date": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "delivery_window": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "miles": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "weight": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "equipment": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "rate": {
+          "ok": true,
+          "expected": 2095,
+          "got": 2095
+        }
+      },
+      "cost": 0.0237,
+      "path": "image"
+    },
+    {
+      "file": "photo_2026-07-09_20-11-17.jpg",
+      "correct": 12,
+      "fields": {
+        "broker": {
+          "ok": true,
+          "expected": [
+            null,
+            "Uber Freight"
+          ],
+          "got": null
+        },
+        "load_number": {
+          "ok": true,
+          "expected": "9902331189",
+          "got": "UF-9902331189"
+        },
+        "pickup_location": {
+          "ok": true,
+          "expected": "Chicago",
+          "got": "General Packaging Corporation, Chicago, IL"
+        },
+        "pickup_date": {
+          "ok": true,
+          "expected": [
+            null,
+            "2023-09-13"
+          ],
+          "got": "2023-09-13"
+        },
+        "pickup_window": {
+          "ok": true,
+          "expected": [
+            null,
+            "13:00"
+          ],
+          "got": "13:00 CDT"
+        },
+        "delivery_location": {
+          "ok": true,
+          "expected": "Carlisle",
+          "got": "Land O'Lakes, Carlisle, PA"
+        },
+        "delivery_date": {
+          "ok": true,
+          "expected": [
+            null,
+            "2023-09-14"
+          ],
+          "got": "2023-09-14"
+        },
+        "delivery_window": {
+          "ok": true,
+          "expected": [
+            null,
+            "13:00"
+          ],
+          "got": "13:00 EDT"
+        },
+        "miles": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "weight": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "equipment": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "rate": {
+          "ok": true,
+          "expected": 2095,
+          "got": 2095
+        }
+      },
+      "cost": 0.024,
+      "path": "image"
+    },
+    {
+      "file": "photo_2026-07-09_20-11-23.jpg",
+      "correct": 4,
+      "fields": {
+        "broker": {
+          "ok": false,
+          "expected": [
+            null,
+            "Uber Freight"
+          ],
+          "got": "Market Access"
+        },
+        "load_number": {
+          "ok": true,
+          "expected": [
+            null,
+            "9902331189"
+          ],
+          "got": "9902331189"
+        },
+        "pickup_location": {
+          "ok": false,
+          "expected": null,
+          "got": "Winchester, VA"
+        },
+        "pickup_date": {
+          "ok": false,
+          "expected": null,
+          "got": "2024-09-14"
+        },
+        "pickup_window": {
+          "ok": false,
+          "expected": null,
+          "got": "18:00 EDT"
+        },
+        "delivery_location": {
+          "ok": false,
+          "expected": null,
+          "got": "Stockton, CA"
+        },
+        "delivery_date": {
+          "ok": false,
+          "expected": null,
+          "got": "2024-09-20"
+        },
+        "delivery_window": {
+          "ok": false,
+          "expected": null,
+          "got": "11:00 PDT"
+        },
+        "miles": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "weight": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "equipment": {
+          "ok": true,
+          "expected": null,
+          "got": null
+        },
+        "rate": {
+          "ok": false,
+          "expected": null,
+          "got": 3405
+        }
+      },
+      "cost": 0.0361,
+      "path": "image"
+    }
+  ]
+}

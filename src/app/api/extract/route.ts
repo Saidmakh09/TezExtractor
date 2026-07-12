@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { extractFromFile } from "@/lib/extractText";
-import { extractLoad } from "@/lib/extractLoad";
+import { extractLoad, MODELS, type ModelId } from "@/lib/extractLoad";
 import { validateLoad } from "@/lib/validateLoad";
 import { supabaseServer } from "@/lib/supabase";
 
@@ -42,8 +42,20 @@ export async function POST(request: Request) {
       input = { kind: "text" as const, text: extracted.text };
     }
 
-    const { record, usage } = await extractLoad(input);
+    // Eval harness knobs: ?save=false skips the database write,
+    // ?model=<id> runs a different Claude model for comparison.
+    const url = new URL(request.url);
+    const save = url.searchParams.get("save") !== "false";
+    const modelParam = url.searchParams.get("model");
+    const model: ModelId =
+      modelParam && modelParam in MODELS ? (modelParam as ModelId) : "claude-opus-4-8";
+
+    const { record, usage } = await extractLoad(input, model);
     const validation = validateLoad(record);
+
+    if (!save) {
+      return NextResponse.json({ ok: true, name: file.name, path: extracted.kind, record, validation, usage });
+    }
 
     const supabase = supabaseServer();
     const { data: saved, error: dbError } = await supabase

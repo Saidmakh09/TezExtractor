@@ -24,6 +24,17 @@ Next.js, TypeScript, Supabase (PostgreSQL), Claude API, Vercel.
 
 The `samples/` folder holds real rate confirmations from four brokers (kept out of git because they contain real phone numbers and contact details). The eval answer key is built from these.
 
+## Accuracy
+
+Measured against a hand labeled answer key covering all 13 sample documents (156 field cells) from 9 different brokers, run through the live pipeline by `scripts/eval.mjs`:
+
+| Model | Overall | Clean rate confirmation PDFs | Cost per full run |
+|---|---|---|---|
+| Claude Opus 4.8 | 92.9% (145/156) | 100% (84/84) | $0.39 |
+| Claude Haiku 4.5 | 93.6% (146/156) | 98.8% (83/84) | $0.06 |
+
+The aggregate scores are close, but the error types differ: the smaller model made category confusions (reading the carrier's MC number as the load number, naming the carrier as the broker) that the larger model avoided. Known limitation surfaced by the eval: a screenshot listing multiple available loads fools both models into reporting one of them as the booked load; the fix would be a document classifier stage upstream.
+
 ## Status
 
-In development. See BUILD_PLAN.md for the step by step plan. MVP is Step 10.
+MVP complete (Steps 1 to 10). See BUILD_PLAN.md for what each step delivered and the Phase 2 and 3 roadmap.

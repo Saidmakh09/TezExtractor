@@ -2,10 +2,13 @@ import Anthropic from "@anthropic-ai/sdk";
 import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 import { LoadRecordSchema, type LoadRecord } from "./loadRecord";
 
-const MODEL = "claude-opus-4-8";
-// Pricing per million tokens, for the usage report we return with each call.
-const INPUT_PRICE_PER_MTOK = 5.0;
-const OUTPUT_PRICE_PER_MTOK = 25.0;
+// Pricing per million tokens (input, output), for the usage report.
+export const MODELS = {
+  "claude-opus-4-8": { input: 5.0, output: 25.0 },
+  "claude-haiku-4-5": { input: 1.0, output: 5.0 },
+} as const;
+export type ModelId = keyof typeof MODELS;
+const DEFAULT_MODEL: ModelId = "claude-opus-4-8";
 
 const SYSTEM_PROMPT = `You extract structured load records from trucking rate confirmations.
 
@@ -50,13 +53,15 @@ function buildContent(input: ExtractInput): Anthropic.ContentBlockParam[] {
 }
 
 export async function extractLoad(
-  input: ExtractInput
+  input: ExtractInput,
+  model: ModelId = DEFAULT_MODEL
 ): Promise<{ record: LoadRecord; usage: ExtractionUsage }> {
   const client = new Anthropic();
   const response = await client.messages.parse({
-    model: MODEL,
+    model,
     max_tokens: 4000,
-    thinking: { type: "adaptive" },
+    // Adaptive thinking exists on Opus; Haiku 4.5 runs without thinking.
+    ...(model === "claude-opus-4-8" ? { thinking: { type: "adaptive" as const } } : {}),
     system: SYSTEM_PROMPT,
     messages: [{ role: "user", content: buildContent(input) }],
     output_config: { format: zodOutputFormat(LoadRecordSchema) },
@@ -66,9 +71,10 @@ export async function extractLoad(
     throw new Error(`Extraction returned no parsable record (stop_reason: ${response.stop_reason})`);
   }
 
+  const price = MODELS[model];
   const cost =
-    (response.usage.input_tokens * INPUT_PRICE_PER_MTOK) / 1_000_000 +
-    (response.usage.output_tokens * OUTPUT_PRICE_PER_MTOK) / 1_000_000;
+    (response.usage.input_tokens * price.input) / 1_000_000 +
+    (response.usage.output_tokens * price.output) / 1_000_000;
 
   return {
     record: response.parsed_output,
