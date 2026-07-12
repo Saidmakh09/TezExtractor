@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { extractFromFile } from "@/lib/extractText";
 import { extractLoad } from "@/lib/extractLoad";
+import { validateLoad } from "@/lib/validateLoad";
 
 // Full pipeline: uploaded rate confirmation in, structured load record out.
 export async function POST(request: Request) {
@@ -34,7 +35,8 @@ export async function POST(request: Request) {
     }
 
     const { record, usage } = await extractLoad(input);
-    return NextResponse.json({ ok: true, name: file.name, path: extracted.kind, record, usage });
+    const validation = validateLoad(record);
+    return NextResponse.json({ ok: true, name: file.name, path: extracted.kind, record, validation, usage });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return NextResponse.json({ ok: false, error: message }, { status: 500 });
