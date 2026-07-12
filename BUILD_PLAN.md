@@ -15,11 +15,14 @@ Each step ends with something you can run and see. MVP is Step 10.
 - [x] **Step 9: Review dashboard.** Every extraction now persists to the Supabase loads table. The /loads dashboard lists all records with status badges (Extracted, Needs review, Approved); clicking a row opens an editor for all 12 fields with Save and approve. Verified end to end in the browser: flagged record corrected (rate set by reviewer) and approved, status updated in Postgres.
 - [x] **Step 10: Accuracy eval (MVP COMPLETE).** Hand labeled answer key for all 13 samples (156 field cells); scripts/eval.mjs scores the live pipeline against it. Results: Opus 4.8 = 92.9% overall and 100% (84/84) on the 7 real rate confirmation PDFs, $0.39 per run; Haiku 4.5 = 93.6% overall at $0.056 per run but with category errors Opus avoided (read the carrier MC number as the load number, named the carrier as the broker). Known limitation found by the eval: a marketplace listing screenshot (many candidate loads) fools both models into reporting one load as booked.
 
+- [ ] **Step 10b: Open benchmark.** Turn the eval into a public asset: a set of synthetic rate confirmations modeled on the real formats (varied broker letterheads, some degraded scans), a hand labeled answer key, and a grading script anyone can run against any extraction system. Publish with baseline scores for several models (Opus, Haiku, others). No public benchmark for freight documents exists anywhere, so this is a first. The private `samples/` folder stays private; the published set is built clean, with an anonymization and methodology note in its README. (See docs/MARKET_RESEARCH.md for precedents: RD-TableBench, OmniAI OCR benchmark.)
+
 ## Phase 2: The inbox
 
 - [ ] **Step 11: Email ingestion.** A forwarding address or Gmail integration so rate confirmations flow in automatically instead of by manual upload.
 - [ ] **Step 12: Dedupe and threading.** The same load often arrives twice (original plus a revised rate con). Detect updates to an existing load instead of creating duplicates.
 - [ ] **Step 13: Deploy.** Vercel production deploy with a simple login.
+- [ ] **Step 13b: Broker verification.** On every extraction, look up the broker's MC number in FMCSA's free QCMobile API (https://mobile.fmcsa.dot.gov/QCDevsite/docs/qcApi): is the authority active, does the company actually hold broker authority (a carrier only authority offering a load is a double brokering red flag), is it out of service, and does the registered name match the rate con letterhead. Results appear as fraud flags in the review dashboard next to the extracted fields. Carrier side broker vetting is the underserved direction of the #1 industry problem (freight fraud: $455M+ reported losses in 2024).
 
 ## Phase 3: Toward a small TMS
 
