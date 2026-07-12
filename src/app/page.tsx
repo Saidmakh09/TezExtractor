@@ -7,6 +7,7 @@ type Confidence = "high" | "medium" | "low";
 type ExtractResponse = {
   ok: boolean;
   error?: string;
+  id?: string;
   name?: string;
   path?: "pdf-text" | "pdf-scan" | "image";
   record?: Record<string, string | number | null> & {
@@ -70,7 +71,12 @@ export default function Home() {
 
   return (
     <main className="mx-auto min-h-screen max-w-3xl p-8 font-sans">
-      <h1 className="text-3xl font-bold tracking-tight">Tez Extractor</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold tracking-tight">Tez Extractor</h1>
+        <a href="/loads" className="text-sm text-blue-600 hover:underline dark:text-blue-400">
+          View saved loads
+        </a>
+      </div>
       <p className="mt-1 text-zinc-600 dark:text-zinc-400">
         Turns trucking rate confirmations into structured load records.
       </p>
@@ -145,6 +151,15 @@ export default function Home() {
               ${result.usage?.cost_usd.toFixed(4)}
             </span>
           </div>
+
+          {result.id && (
+            <p className="mt-2 text-sm text-zinc-500">
+              Saved.{" "}
+              <a href="/loads" className="text-blue-600 hover:underline dark:text-blue-400">
+                Review it on the loads dashboard
+              </a>
+            </p>
+          )}
 
           {result.validation && result.validation.problems.length > 0 && (
             <ul className="mt-4 space-y-1 rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-200">
