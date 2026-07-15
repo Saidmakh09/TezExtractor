@@ -62,6 +62,20 @@ jobs:
             exit 1
           fi
 
+      # samples/ is gitignored because the real documents contain personal
+      # phone numbers. They ship to CI as samples.enc, an AES encrypted blob
+      # committed to the repo, and are decrypted here in the runner only.
+      - name: Unpack eval samples
+        env:
+          SAMPLES_KEY: ${{ secrets.SAMPLES_KEY }}
+        run: |
+          if [ -z "$SAMPLES_KEY" ]; then
+            echo "::error::SAMPLES_KEY secret is not set. Run scripts/pack_samples.sh locally."
+            exit 1
+          fi
+          openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass "pass:$SAMPLES_KEY" -in samples.enc | tar xz
+          ls samples | wc -l
+
       - name: Install exact dependencies
         run: npm ci
 
