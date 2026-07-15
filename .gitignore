@@ -14,3 +14,4 @@ CLAUDE.md
 
 # Local test fixtures copied from samples/: never commit
 public/samples/
+tsconfig.tsbuildinfo

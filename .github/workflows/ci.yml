@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  checks:
+    name: Typecheck, test, and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install exact dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Build production application
+        run: npm run build
+
+  eval:
+    # Runs the 156 cell extraction accuracy eval against the real Claude API
+    # (claude-haiku-4-5, about $0.06 per run) and fails the build if overall
+    # field accuracy drops below the floor. Skipped on pull requests so fork
+    # PRs never see the API key; runs on every push to main and on demand.
+    name: Extraction accuracy eval
+    needs: checks
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      EVAL_MODEL: claude-haiku-4-5
+      EVAL_MIN_PCT: "90"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Require the API key secret
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::error::ANTHROPIC_API_KEY secret is not set. Run: gh secret set ANTHROPIC_API_KEY"
+            exit 1
+          fi
+
+      - name: Install exact dependencies
+        run: npm ci
+
+      - name: Build production application
+        run: npm run build
+
+      - name: Start server
+        run: |
+          npm run start -- -p 3001 &
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:3001 > /dev/null; then
+              echo "Server is up"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "::error::Server did not come up on port 3001"
+          exit 1
+
+      - name: Run accuracy eval
+        run: node scripts/eval.mjs "$EVAL_MODEL"
+
+      - name: Upload eval results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: scripts/eval_results_*.json

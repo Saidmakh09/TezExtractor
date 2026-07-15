@@ -3,12 +3,14 @@
 //
 //   node scripts/eval.mjs [model]     model: claude-opus-4-8 (default) | claude-haiku-4-5
 //
-// Requires the dev server on http://localhost:3001 and files in samples/.
+// Requires the server on http://localhost:3001 (override with EVAL_BASE_URL)
+// and files in samples/. Set EVAL_MIN_PCT (e.g. 90) to exit nonzero when
+// overall accuracy lands below that percentage; CI uses this as the gate.
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 const MODEL = process.argv[2] ?? "claude-opus-4-8";
-const BASE = "http://localhost:3001";
+const BASE = process.env.EVAL_BASE_URL ?? "http://localhost:3001";
 const KEY = JSON.parse(readFileSync(new URL("./answer_key.json", import.meta.url), "utf8"));
 const FIELDS = [
   "broker", "load_number", "pickup_location", "pickup_date", "pickup_window",
@@ -90,3 +92,17 @@ writeFileSync(
   JSON.stringify({ model: MODEL, overall: { correct: totalCorrect, total: totalCells }, perField, totalCost, results }, null, 2)
 );
 console.log(`\nSaved scripts/eval_results_${MODEL}.json`);
+
+if (process.env.EVAL_MIN_PCT) {
+  const minPct = Number(process.env.EVAL_MIN_PCT);
+  const pct = (totalCorrect / totalCells) * 100;
+  if (!Number.isFinite(minPct)) {
+    console.error(`EVAL_MIN_PCT is not a number: ${process.env.EVAL_MIN_PCT}`);
+    process.exit(1);
+  }
+  if (pct < minPct) {
+    console.error(`\nFAIL: overall accuracy ${pct.toFixed(1)}% is below the ${minPct}% floor`);
+    process.exit(1);
+  }
+  console.log(`\nPASS: overall accuracy ${pct.toFixed(1)}% meets the ${minPct}% floor`);
+}

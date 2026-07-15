@@ -20,7 +20,11 @@ const REQUIRED_FIELDS = [
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 function isValidDate(value: string): boolean {
-  return ISO_DATE.test(value) && !Number.isNaN(Date.parse(value));
+  if (!ISO_DATE.test(value)) return false;
+  // Round trip through Date to reject impossible days like 2023-02-30,
+  // which some engines silently roll over instead of failing to parse.
+  const parsed = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
 }
 
 export function validateLoad(record: LoadRecord): ValidationResult {
